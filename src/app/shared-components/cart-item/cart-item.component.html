@@ -1,0 +1,9 @@
+<div class="flex overflow-hidden gap-4">
+  <img src="/assets/images/course.jpg" width="100" />
+  <div class="flex-1">
+    <h3 class="font-medium">{{cartItem.courseName}}</h3>
+    <p>{{cartItem.discountPrice}}</p>
+  </div>
+  <button (click)="deleteCartItem.emit()"><img src="/assets/images/icons8-trash-30.png" /></button>
+  <button *ngIf="showAddWishlistBtn" (click)="addToWishlist.emit(cartItem)"><img src="/assets/images/icons8-heart-50.png" width="30" /></button>
+</div>

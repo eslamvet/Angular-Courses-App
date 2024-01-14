@@ -1,0 +1,27 @@
+<section>
+  <app-page-banner></app-page-banner>
+  <div class="container mx-auto py-12">
+    <div class="flex gap-5 mb-5">
+      <a routerLink="/" routerLinkActive="text-orange-400" [routerLinkActiveOptions]="{exact:true}">All Courses</a>
+      <span>>></span>
+      <a [routerLink]="['/courses/',courseName]" routerLinkActive="text-orange-400">{{this.courseName}}</a>
+    </div>
+    <div *ngIf="course$ | async as course;else notFound" class="grid grid-cols-2 gap-10">
+      <div class="border shadow rounded flex flex-col justify-center p-4">
+        <app-timer></app-timer>
+        <h2 class="text-2xl font-bold mb-5">{{course.courseName}}</h2>
+        <p class="text-lg mb-4">by {{course.author}}</p>
+        <p class="flex gap-3 mb-5">price: <span *ngIf="course.discountPercentage !== '0'">{{course.discountPrice}}</span><span [class.line-through]="course.discountPercentage !== '0'">{{course.actualPrice}}</span></p>
+        <div class="flex gap-5">
+          <button class="w-1/2 py-2 px-3 bg-cyan-900 text-white rounded" (click)="addToCartHandler(course)">Add to cart</button>
+          <button [disabled]="course.isWhislist" class="w-1/2 py-2 px-3 bg-yellow-500 text-white rounded" (click)="!course.isWhislist && addToWishlistHandler(course)"><span *ngIf="!course.isWhislist;else wishlistImage">Add to whislist</span><ng-template #wishlistImage><img class="mx-auto" src="/assets/images/icons8-heart-48.png" width="24" /></ng-template></button>
+        </div>
+      </div>
+      <div class="border relative shadow rounded p-4">
+        <button (click)="isVideoPlaying ? videoPlayer.pause() : videoPlayer.play();isVideoPlaying=!isVideoPlaying" class="absolute top-1/2 left-1/2 z-10" style="transform: translate(-50%,-50%);"><img src="/assets/images/{{isVideoPlaying ? 'icons8-pause-50.png' : 'run_video.svg'}}" width="50" /></button>
+        <video src="/assets/videos/SampleVideo.mp4" #videoPlayer poster="/assets/images/course.jpg"></video>
+      </div>
+    </div>
+    <ng-template #notFound><p class="text-center">There is no course with this name</p></ng-template>
+  </div>
+</section>

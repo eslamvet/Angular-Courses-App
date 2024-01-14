@@ -1,0 +1,7 @@
+<div [@fade]="(modalService.showModalObs$ | async) ? 'show' : 'hide'" [style.visibility]="(modalService.showModalObs$ | async) ? 'visible' : 'hidden'" class="modal" tabindex="-1">
+  <a class="modal__overlay" (click)="modalService.hideModal()"></a>
+  <div [@translate]="(modalService.showModalObs$ | async) ? 'show' : 'hide'" class="modal-content">
+    <button class="close__btn" (click)="modalService.hideModal()">x</button>
+    <ng-template #modalContent></ng-template>
+  </div>
+</div>

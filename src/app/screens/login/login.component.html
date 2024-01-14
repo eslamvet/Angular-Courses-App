@@ -1,0 +1,13 @@
+<form #loginForm="ngForm" (ngSubmit)="userLoginHandler(loginForm)">
+  <div class="mb-5">
+    <label class="block" for="firstName">Full Name</label>
+    <input class="w-full" id="firstName" type="text" name="fullName" #fullName="ngModel" ngModel required />
+    <span *ngIf="fullName.touched && fullName.invalid" class="text-red-600 text-sm mt-2">First name required</span>
+  </div>
+  <div class="mb-10">
+    <label class="block" for="password">Password</label>
+    <input class="w-full" id="password" type="password" name="password" #password="ngModel" ngModel required pattern="^dummy@123$" />
+    <span *ngIf="password.touched && password.invalid" class="text-red-600 text-sm mt-2">{{password.errors?.['required'] ? 'Password required' : 'Password invalid'}}</span>
+  </div>
+  <button [disabled]="loginForm.invalid" class="w-full text-center text-white rounded py-3 bg-yellow-400">Login</button>
+</form>

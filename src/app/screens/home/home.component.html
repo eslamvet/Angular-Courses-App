@@ -1,0 +1,39 @@
+<section class="pb-12">
+  <app-page-banner></app-page-banner>
+  <div class="container mx-auto">
+    <div class="flex py-12 gap-10">
+      <div class="flex-1">
+        <label class="block mb-2" for="course_search_input">Filter By Name, Author and Tag</label>
+        <input #searchInput class="w-full" id="course_search_input" type="text">
+      </div>
+      <div class="basis-1/4">
+        <label class="block mb-2" for="course_price_sorting_list">Sort By Price</label>
+        <select [(ngModel)]="sort" class="w-full" id="course_price_sorting_list">
+          <option value="asc">From Lowest to Highest</option>
+          <option value="desc">From Highest to Lowest</option>
+        </select>
+      </div>
+    </div>
+    <ng-container *ngIf="courses$ | async as courses">
+      <ng-container *ngIf="courses | filter : (searchText$ | async) as filteredCourses">
+        <ng-container *ngIf="filteredCourses.length;else empty">
+          <div class="pb-12 grid grid-cols-4 gap-5">
+            <app-course-card *ngFor="let course of filteredCourses | sortByPrice : sort | slice : currentIndex * numOfCoursesPerPage : currentIndex * numOfCoursesPerPage + numOfCoursesPerPage;trackBy:trackBy" [course]="course" [isWishlist]="(wishlistItems$ | async)! | isCourseWishlist : course" (addToCart)="addToCartHandler($event)" (addToWishlist)="addToWishlistHandler($event)"></app-course-card>
+          </div>
+          <div class="flex justify-center gap-4">
+            <button [disabled]="currentIndex == 0" (click)="currentIndex=currentIndex - 1"><< Prev</button>
+            <button [disabled]="currentIndex * numOfCoursesPerPage + numOfCoursesPerPage > filteredCourses.length" (click)="currentIndex=currentIndex + 1">Next >></button>
+            <select (change)="pageSizeChangeHandler($event)">
+              <option value="4">4</option>
+              <option value="8">8</option>
+              <option value="12">12</option>
+            </select>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #empty>
+        <p class="text-center text-white bg-orange-300 rounded py-5">There are no courses match this filter</p>
+      </ng-template>
+    </ng-container>
+  </div>
+</section>

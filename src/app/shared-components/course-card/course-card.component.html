@@ -1,0 +1,15 @@
+<div class="shadow-md rounded-lg border border-gray-400 overflow-hidden">
+  <img src="/assets/images/course.jpg" />
+  <div class="p-4 flex flex-col gap-2">
+    <h3 class="text-lg font-medium">{{course.courseName}}</h3>
+    <p>by: {{course.author}}</p>
+    <p class="flex gap-3">price: <span *ngIf="course.discountPercentage !== '0'">{{course.discountPrice}}</span><span [class.line-through]="course.discountPercentage !== '0'">{{course.actualPrice}}</span></p>
+    <p class="flex gap-2">tags: <span *ngFor="let tag of course.tags">{{tag}}</span></p>
+    <div class="flex gap-3">
+      <button class="w-1/2 py-2 px-3 bg-cyan-900 text-white rounded" (click)="addToCart.emit(course)">Add to cart</button>
+      <button [disabled]="isWishlist && !showRemoveWishlistBtn" class="w-1/2 py-2 px-3 bg-yellow-500 text-white rounded" (click)="!isWishlist ? addToWishlist.emit(course) : removeFromWishlist.emit()"><span *ngIf="!isWishlist || showRemoveWishlistBtn;else wishlistImage">{{showRemoveWishlistBtn ? 'remove from whislist':'Add to whislist'}}</span><ng-template #wishlistImage><img class="mx-auto" src="/assets/images/icons8-heart-48.png" width="24" /></ng-template></button>
+    </div>
+    <hr color="#f6f6f6" />
+    <a class="flex justify-between" [routerLink]="['/courses',course.courseName]"><span>Go to course</span><img src="/assets/images/icons8-arrow-right-50.png" width="30" /></a>
+  </div>
+</div>

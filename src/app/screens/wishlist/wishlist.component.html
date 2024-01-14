@@ -1,0 +1,10 @@
+<section class="container mx-auto py-12">
+  <ng-container *ngIf="wishlistItems$ | async as whislistItems">
+    <div *ngIf="whislistItems.length;else emptywishlist" class="grid grid-cols-4 gap-5">
+      <app-course-card *ngFor="let course of whislistItems;let index = index" [course]="course" [showRemoveWishlistBtn]="true" [isWishlist]="whislistItems | isCourseWishlist : course" (addToCart)="addToCartHandler($event)" (removeFromWishlist)="removeFromWishlistHandler(index)"></app-course-card>
+    </div>
+    <ng-template #emptywishlist>
+      <p class="text-center">The wishlist is empty</p>
+    </ng-template>
+  </ng-container>
+</section>

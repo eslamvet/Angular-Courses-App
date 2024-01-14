@@ -1,0 +1,23 @@
+<nav class="container mx-auto py-5 flex gap-10 items-center text-white">
+  <a routerLink="/"><img src="/assets/images/logo.png" width="150" height="60" /></a>
+  <ul class="flex-1 flex justify-center gap-5 text-lg">
+    <li><button class="p-1" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Courses</button></li>
+    <li><button class="p-1" (click)="navLinkClickHandler('/wishlist')" routerLinkActive="active">WishList</button></li>
+    <li><button class="p-1" (click)="navLinkClickHandler('/cart')" routerLinkActive="active">Cart</button></li>
+    <li><button class="p-1" (click)="navLinkClickHandler('/profile')" routerLinkActive="active">Profile</button></li>
+  </ul>
+  <div *ngIf="cartItems$ | async as cartItems" class="relative">
+    <button (click)="showCartMenu()">
+      <span class="absolute bg-red-500 w-5 h-5 rounded-full text-sm">{{cartItems.length}}</span>
+      <img src="/assets/images/icons8-cart-50.png" width="30" />
+    </button>
+    <ul id="cartMenu" class="absolute shadow-md p-3 rounded bg-white right-0 z-10 w-96 text-black animate-zoomIn" style="display: none;">
+        <ng-container *ngIf="cartItems.length;else EmptyCart">
+          <li class="mb-3" *ngFor="let item of cartItems;let cIndex = index;trackBy:trackBy"><app-cart-item [cartItem]="item" (deleteCartItem)="deleteCartItemHandler(cIndex)"></app-cart-item></li>
+          <li class="mb-3"><p>totalPrice: {{(cartItems | calculateTotalPrice)['totalAfterDiscount']}}</p></li>
+          <li><a class="block py-2 px-3 text-center bg-yellow-500 text-white rounded" (click)="closeCartMenu()" routerLink="/cart">Go To Checkout</a></li>
+        </ng-container>
+        <ng-template #EmptyCart><p class="text-center">The cart is empty</p></ng-template>
+    </ul>
+  </div>
+</nav>

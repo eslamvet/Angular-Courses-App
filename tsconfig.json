@@ -6,6 +6,12 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "paths": {
+      "@services/*":["src/app/services/*"],
+      "@interfaces/*":["src/app/interfaces/*"],
+      "@pipes/*":["src/app/pipes/*"],
+      "@shared/*":["src/app/shared-components/*"]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

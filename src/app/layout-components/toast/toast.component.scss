@@ -1,0 +1,38 @@
+.toast-container{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .toast{
+    position: relative;
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    color: white;
+    .btn-close{
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 10px;
+      font-size: 8px;
+      background-color: rgba(0, 0, 0, .3);
+    }
+    p{
+      font-size: 14px;
+      overflow: hidden;
+      max-height: 42px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
+
+

@@ -1,0 +1,22 @@
+<div class="container mx-auto py-12">
+  <ng-container *ngIf="cartItems$ | async as cartItems">
+    <div class="grid grid-cols-2 gap-12" *ngIf="cartItems.length;else emptycart">
+      <ul class="p-4 border rounded shadow">
+        <li *ngFor="let item of cartItems;let cIndex = index;let last = last;trackBy:trackBy" [class.mb-3]="!last"><app-cart-item [cartItem]="item" [showAddWishlistBtn]="true" (deleteCartItem)="deleteCartItemHandler(cIndex)" (addToWishlist)="addToWishlistHandler($event,cIndex)"></app-cart-item></li>
+      </ul>
+      <div *ngIf="cartItems | calculateTotalPrice as allPrices" class="p-4 border rounded shadow">
+        <h3 class="text-lg mb-3 font-medium">totalPriceBeforeDiscount: {{allPrices['totalBeforeDiscount']}}</h3>
+        <h3 class="text-lg mb-3 font-medium">discount: {{allPrices['discount']}}</h3>
+        <h3 class="text-lg mb-3 font-medium">totalPriceAfterDiscount: {{allPrices['totalAfterDiscount']}}</h3>
+        <button class="w-full py-2 px-3 text-center bg-yellow-500 text-white rounded" (click)="showCheckOutModal()">Go To Checkout</button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #emptycart>
+    <p class="text-center">The cart is empty</p>
+  </ng-template>
+  <ng-template #checkouttemplate>
+    <p class="font-bold py-3 bg-green-400 text-center text-xl text-white mb-5">Successful order placement</p>
+    <button class="w-full py-2 px-3 text-center bg-yellow-500 text-white rounded" (click)="confirmPayment()">ok</button>
+  </ng-template>
+</div>

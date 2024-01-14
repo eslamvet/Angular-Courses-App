@@ -1,0 +1,6 @@
+﻿<div id="toastcontainer" class="toast-container">
+  <div @toastTrigger *ngFor="let toast of toasts$ | async | slice : 0 : 9;trackBy:trackBy" class="toast" [ngClass]="{'bg-green-400':toast.type == toastTypes.SUCCESS,'bg-orange-400':toast.type == toastTypes.WARNING,'bg-red-600':toast.type == toastTypes.DANGER}" role="alert" aria-live="assertive">
+    <button class="btn-close">X</button>
+    <p>{{toast.message}}</p>
+  </div>
+</div>

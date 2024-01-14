@@ -1,0 +1,70 @@
+<div *ngIf="user$ | async as user" class="container mx-auto py-12 grid gap-10 grid-cols-3 items-center">
+  <div>
+    <img src="/assets/images/user.png" width="300" />
+  </div>
+  <form #userForm="ngForm" class="col-span-2" (ngSubmit)="updateUser(userForm)">
+    <div class="mb-5">
+      <label for="fullName">Full Name</label>
+      <input id="fullName" type="text" name="fullName" #fullName="ngModel" [ngModel]="user.fullName" required />
+      <span *ngIf="fullName.touched && fullName.invalid" class="text-red-600 text-sm mt-2">Full name required</span>
+    </div>
+    <div class="flex gap-5 mb-5">
+      <div class="flex-1">
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" name="firstName" #firstName="ngModel" [ngModel]="user.firstName" required />
+        <span *ngIf="firstName.touched && firstName.invalid" class="text-red-600 text-sm mt-2">First name required</span>
+      </div>
+      <div class="flex-1">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" name="lastName" [ngModel]="user.lastName" />
+      </div>
+    </div>
+    <div class="mb-5">
+      <label for="about">About yourself</label>
+      <textarea id="about" name="about" #about="ngModel" [ngModel]="user.about" rows="3" maxlength="100"></textarea>
+      <span *ngIf="about.touched && about.invalid" class="text-red-600 text-sm mt-2">About not exceed 100 letters</span>
+    </div>
+    <div class="mb-5">
+      <label for="interests">Your area of interest</label>
+      <select id="interests" name="interests" [ngModel]="user.interests" multiple>
+        <option value="programming">Programming</option>
+        <option value="banking">Banking</option>
+        <option value="management">Managment</option>
+        <option value="marketing">Marketing</option>
+      </select>
+    </div>
+    <div class="mb-5">
+      <label for="userType">Are you a student or a professional?</label>
+      <select id="userType" name="userType" #userType="ngModel" [ngModel]="user.userType">
+        <option value="">choose</option>
+        <option value="student">Student</option>
+        <option value="professional">Professional</option>
+      </select>
+    </div>
+    <div class="mb-5 flex gap-5" *ngIf="userType.value == 'professional'">
+      <div class="flex-1">
+        <label for="experience">Experience</label>
+        <select id="experience" name="experience" #experience="ngModel" [ngModel]="user.experience">
+          <option value="">choose</option>
+          <option value="0-5">0-5</option>
+          <option value="5-10">5-10</option>
+          <option value="10 & above">10 & above</option>
+        </select>
+      </div>
+      <div class="flex-1">
+        <label for="expertise">Expertise</label>
+        <select id="expertise" name="expertise" #expertise="ngModel" [ngModel]="user.expertise">
+          <option value="">choose</option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-10">
+      <label for="role">Mention your role</label>
+      <textarea id="role" name="role" #role="ngModel" [ngModel]="user.role" rows="3" maxlength="200"></textarea>
+      <span *ngIf="role.touched && role.invalid" class="text-red-600 text-sm mt-2">Role not exceed 100 letters</span>
+    </div>
+    <button [disabled]="userForm.invalid" class="w-full text-center text-white rounded py-4 bg-yellow-400">Save</button>
+  </form>
+</div>
