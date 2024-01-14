@@ -3,6 +3,7 @@
   position: fixed;
   visibility: hidden;
   top: 0;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -14,7 +15,7 @@
     border-radius: 10px;
     padding: 50px 30px 40px;
     position: relative;
-    z-index: 1000;
+    z-index: 10000;
     overflow: auto;
     max-height: 90%;
     .close__btn{
@@ -30,7 +31,6 @@
     position: absolute;
     cursor: pointer;
     top: 0;
-    z-index: 999;
     left: 0;
     right: 0;
     bottom: 0;

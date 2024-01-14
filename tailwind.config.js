@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        '2xl': '1480px',
+      },
       animation: {
         zoomIn: 'zoomIn .25s ease-in-out',
       },
