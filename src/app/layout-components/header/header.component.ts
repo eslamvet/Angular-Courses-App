@@ -4,6 +4,7 @@ import { CartService } from '@services/cart.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/screens/login/login.component';
+import { BASE_HREF } from '@utils/base-href';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,10 @@ import { LoginComponent } from 'src/app/screens/login/login.component';
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
+  BASE_HREF=BASE_HREF
+
   constructor(private cartService:CartService,private userService:UserService,private router:Router,private modalService:ModalService){}
+
   showCartMenu(){
     const cartMenuEl = document.getElementById('cartMenu') as HTMLUListElement
     cartMenuEl.style.display = cartMenuEl.style.display == "block" ? "none" : "block"

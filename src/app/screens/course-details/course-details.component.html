@@ -18,8 +18,8 @@
         </div>
       </div>
       <div class="border relative shadow rounded p-4">
-        <button (click)="isVideoPlaying ? videoPlayer.pause() : videoPlayer.play();isVideoPlaying=!isVideoPlaying" class="absolute top-1/2 left-1/2 z-10" style="transform: translate(-50%,-50%);"><img src="/assets/images/{{isVideoPlaying ? 'icons8-pause-50.png' : 'run_video.svg'}}" width="50" /></button>
-        <video src="/assets/videos/SampleVideo.mp4" #videoPlayer poster="/assets/images/course.jpg"></video>
+        <button (click)="isVideoPlaying ? videoPlayer.pause() : videoPlayer.play();isVideoPlaying=!isVideoPlaying" class="absolute top-1/2 left-1/2 z-10" style="transform: translate(-50%,-50%);"><img src="{{BASE_HREF}}assets/images/{{isVideoPlaying ? 'icons8-pause-50.png' : 'run_video.svg'}}" width="50" /></button>
+        <video src="{{BASE_HREF}}assets/videos/SampleVideo.mp4" #videoPlayer poster="{{BASE_HREF}}assets/images/course.jpg"></video>
       </div>
     </div>
     <ng-template #notFound><p class="text-center">There is no course with this name</p></ng-template>

@@ -10,6 +10,7 @@
       "@services/*":["src/app/services/*"],
       "@interfaces/*":["src/app/interfaces/*"],
       "@pipes/*":["src/app/pipes/*"],
+      "@utils/*":["src/app/utils/*"],
       "@shared/*":["src/app/shared-components/*"]
     },
     "noImplicitOverride": true,

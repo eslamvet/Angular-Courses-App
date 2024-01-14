@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '@interfaces/course';
+import { BASE_HREF } from '@utils/base-href';
 
 @Component({
   selector: 'app-course-card',
@@ -14,4 +15,5 @@ export class CourseCardComponent {
   @Output() addToCart = new EventEmitter<Course>()
   @Output() addToWishlist = new EventEmitter<Course>()
   @Output() removeFromWishlist = new EventEmitter()
+  BASE_HREF=BASE_HREF
 }

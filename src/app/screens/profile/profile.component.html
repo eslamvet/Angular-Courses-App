@@ -1,6 +1,6 @@
 <div *ngIf="user$ | async as user" class="container mx-auto py-12 grid gap-10 grid-cols-3 items-center">
   <div>
-    <img src="/assets/images/user.png" width="300" />
+    <img src="{{BASE_HREF}}assets/images/user.png" width="300" />
   </div>
   <form #userForm="ngForm" class="col-span-2" (ngSubmit)="updateUser(userForm)">
     <div class="mb-5">
